@@ -11,6 +11,7 @@ function init() {
 
     var form = document.getElementById("notes");
     form.addEventListener("submit", add);
+    form.addEventListener("submit", printList);
 
     var save = document.getElementById("save");
     save.addEventListener("click", saveList);
@@ -19,6 +20,7 @@ function init() {
     remove.addEventListener("click", function clearList() {
         localStorage.removeItem("notes");
     });
+    remove.addEventListener("click", printList);
 
     printList();
 }
@@ -64,6 +66,7 @@ function add(event) {
     var checkbox = form[1];
 
     var note = {
+        id : generateId(),
         message : text.value,
         done : checkbox.checked,
         time : Date.now()
@@ -73,7 +76,6 @@ function add(event) {
     console.log(note);
     text.value = "";
     checkbox.checked = false;
-    printList();
 }
 
 function saveList() {
@@ -81,6 +83,19 @@ function saveList() {
     var cache = JSON.stringify(notes);
     localStorage.setItem("notes", cache);
     console.log(cache);
+}
+
+function generateId() {
+
+    var cache = localStorage.getItem("uuid");
+    if (cache) {
+        var id = cache;
+    } else {
+        var id = 0;
+    }
+    id++;
+    localStorage.setItem("uuid", id);
+    return id;
 }
 
 window.onload = init;
