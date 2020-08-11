@@ -20,6 +20,7 @@ function init() {
     var remove = document.getElementById("remove");
     remove.addEventListener("click", function clearList() {
         localStorage.removeItem("notes");
+        notes = [];
     });
     remove.addEventListener("click", printList);
 
@@ -44,7 +45,7 @@ function printList() {
         paragraph.addEventListener("click", printList);
 
         var date = new Date(note.time);
-        var time = "(" + date.getDay() + "/" + date.getMonth() + ")";
+        var time = "(" + date.getDate() + "/" + (date.getMonth()+1) + ")";
 
         var text = document.createTextNode(note.message + " " + time);
         paragraph.appendChild(text);
