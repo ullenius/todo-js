@@ -1,5 +1,6 @@
 "use strict";
 
+(function iife() {
 var notes = [];
 
 function init() {
@@ -110,3 +111,4 @@ function generateId() {
 }
 
 window.onload = init;
+})();
