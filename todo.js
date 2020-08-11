@@ -43,7 +43,15 @@ function printList() {
         var text = document.createTextNode(note.message + " " + time);
         paragraph.appendChild(text);
         paragraph.className = (note.done) ? "done" : "todo";
+
         list.appendChild(paragraph);
+
+        var checkbox = document.createElement("input");
+        checkbox.setAttribute("type", "checkbox");
+        if (note.done) {
+            checkbox.setAttribute("checked", null);
+        }
+        paragraph.appendChild(checkbox);
     });
 }
 
@@ -51,16 +59,20 @@ function add(event) {
 
     event.preventDefault();
     
-    var input = document.querySelectorAll("input");
+    var form = document.getElementById("notes");
+    var text = form[0];
+    var checkbox = form[1];
 
     var note = {
-        message : input[0].value,
-        done : input[1].checked,
+        message : text.value,
+        done : checkbox.checked,
         time : Date.now()
     };
     notes.push(note);
     console.log("Note added");
-    input.value = "";
+    console.log(note);
+    text.value = "";
+    checkbox.checked = false;
     printList();
 }
 

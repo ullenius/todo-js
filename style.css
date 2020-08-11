@@ -25,6 +25,14 @@ button:hover {
     color: #FF0000;
 }
 
+ol {
+    display: inline-block;
+}
+
 li {
     padding: 0.5em;
+}
+
+li:hover {
+    background-color: #2C3539;
 }
