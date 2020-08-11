@@ -31,7 +31,7 @@ function printList() {
 
     if (notes) {
         notes.sort(function sort(a,b) {
-            return a.time - b.time
+            return a.time - b.time;
         });
     }
     
@@ -61,7 +61,7 @@ function printList() {
 
 function toggleCheckbox(event) {
 
-    const id = Number(event.target.id);
+    var id = Number(event.target.id);
 
     var index = notes.findIndex(function find(note) {
         return (note.id === id);
@@ -86,8 +86,6 @@ function add(event) {
         time : Date.now()
     };
     notes.push(note);
-    console.log("Note added");
-    console.log(note);
     text.value = "";
     checkbox.checked = false;
 }
@@ -96,7 +94,6 @@ function saveList() {
 
     var cache = JSON.stringify(notes);
     localStorage.setItem("notes", cache);
-    console.log(cache);
 }
 
 function generateId() {
