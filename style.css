@@ -16,3 +16,15 @@ button:hover {
     background-color: #7f007f;
     cursor: pointer;
 }
+
+.done {
+    color: green;
+}
+
+.todo {
+    color: #FF0000;
+}
+
+li {
+    padding: 0.5em;
+}
