@@ -38,14 +38,16 @@ function printList() {
     notes.forEach(function print(note) {
 
         var paragraph = document.createElement("li");
+        paragraph.setAttribute("id", note.id);
+        paragraph.addEventListener("click", toggleCheckbox);
+        paragraph.addEventListener("click", printList);
+
         var date = new Date(note.time);
-        console.log(date.getFullYear());
         var time = "(" + date.getDay() + "/" + date.getMonth() + ")";
 
         var text = document.createTextNode(note.message + " " + time);
         paragraph.appendChild(text);
         paragraph.className = (note.done) ? "done" : "todo";
-
         list.appendChild(paragraph);
 
         var checkbox = document.createElement("input");
@@ -56,6 +58,18 @@ function printList() {
         paragraph.appendChild(checkbox);
     });
 }
+
+function toggleCheckbox(event) {
+
+    const id = Number(event.target.id);
+
+    var index = notes.findIndex(function find(note) {
+        return (note.id === id);
+    });
+    var note = notes[index];
+    note.done = !note.done;
+}
+
 
 function add(event) {
 
