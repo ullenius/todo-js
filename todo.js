@@ -5,12 +5,29 @@ var notes = [];
 function init() {
 
     var cache = localStorage.getItem("notes");
-    console.log(cache);
     if (cache) {
         notes = JSON.parse(cache);
     }
 
-    var app = document.getElementById("todo");
+    var form = document.getElementById("notes");
+    form.addEventListener("submit", add);
+
+    var save = document.getElementById("save");
+    save.addEventListener("click", saveList);
+
+    var remove = document.getElementById("remove");
+    remove.addEventListener("click", function clearList() {
+        console.log("clear list");
+        localStorage.removeItem("notes");
+    });
+
+    printList();
+}
+
+function printList() {
+    var list = document.getElementById("todo");
+    list.innerHTML = "";
+
     if (notes) {
         notes.sort(function sort(a,b) {
             return a.time - b.time
@@ -27,25 +44,12 @@ function init() {
         let text = document.createTextNode(note.message + " " + time);
         paragraph.appendChild(text);
         paragraph.className = (note.done) ? "done" : "todo";
-        app.appendChild(paragraph);
-    });
-
-    var form = document.getElementById("notes");
-    form.addEventListener("submit", add);
-
-    var save = document.getElementById("save");
-    save.addEventListener("click", saveList);
-
-    var remove = document.getElementById("remove");
-    remove.addEventListener("click", function clearList() {
-        console.log("clear list");
-        localStorage.removeItem("notes");
+        list.appendChild(paragraph);
     });
 }
 
 function add(event) {
 
-    console.log("add");
     event.preventDefault();
     
     var input = document.querySelectorAll("input");
@@ -56,6 +60,9 @@ function add(event) {
         time : Date.now()
     };
     notes.push(note);
+    console.log("Note added");
+    input.value = "";
+    printList();
 }
 
 function saveList() {
