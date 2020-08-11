@@ -11,10 +11,20 @@ function init() {
     }
 
     var app = document.getElementById("todo");
+    if (notes) {
+        notes.sort(function sort(a,b) {
+            return a.time - b.time
+        });
+    }
+    
     notes.forEach(function print(note) {
 
         let paragraph = document.createElement("li");
-        let text = document.createTextNode(note.message);
+        let date = new Date(note.time);
+        console.log(date.getFullYear());
+        let time = "(" + date.getDay() + "/" + date.getMonth() + ")";
+
+        let text = document.createTextNode(note.message + " " + time);
         paragraph.appendChild(text);
         paragraph.className = (note.done) ? "done" : "todo";
         app.appendChild(paragraph);
@@ -42,7 +52,8 @@ function add(event) {
 
     let note = {
         message : input[0].value,
-        done : input[1].checked
+        done : input[1].checked,
+        time : Date.now()
     };
     notes.push(note);
 }
