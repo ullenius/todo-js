@@ -17,7 +17,6 @@ function init() {
 
     var remove = document.getElementById("remove");
     remove.addEventListener("click", function clearList() {
-        console.log("clear list");
         localStorage.removeItem("notes");
     });
 
@@ -36,12 +35,12 @@ function printList() {
     
     notes.forEach(function print(note) {
 
-        let paragraph = document.createElement("li");
-        let date = new Date(note.time);
+        var paragraph = document.createElement("li");
+        var date = new Date(note.time);
         console.log(date.getFullYear());
-        let time = "(" + date.getDay() + "/" + date.getMonth() + ")";
+        var time = "(" + date.getDay() + "/" + date.getMonth() + ")";
 
-        let text = document.createTextNode(note.message + " " + time);
+        var text = document.createTextNode(note.message + " " + time);
         paragraph.appendChild(text);
         paragraph.className = (note.done) ? "done" : "todo";
         list.appendChild(paragraph);
@@ -54,7 +53,7 @@ function add(event) {
     
     var input = document.querySelectorAll("input");
 
-    let note = {
+    var note = {
         message : input[0].value,
         done : input[1].checked,
         time : Date.now()
