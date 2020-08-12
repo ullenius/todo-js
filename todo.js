@@ -75,10 +75,10 @@ function toggleCheckbox(event) {
 function add(event) {
 
     event.preventDefault();
-    
-    var form = document.getElementById("notes");
-    var text = form[0];
-    var checkbox = form[1];
+    var [
+        text,
+        checkbox
+        ] = readForm();
 
     var note = {
         id : generateId(),
@@ -91,6 +91,11 @@ function add(event) {
     notes.push(note);
     text.value = "";
     checkbox.checked = false;
+}
+
+function readForm() {
+    var form = document.getElementById("notes");
+    return [form[0], form[1]];
 }
 
 function saveList() {
