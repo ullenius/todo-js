@@ -72,7 +72,6 @@ function toggleCheckbox(event) {
     note.done = !note.done;
 }
 
-
 function add(event) {
 
     event.preventDefault();
@@ -87,6 +86,8 @@ function add(event) {
         done : checkbox.checked,
         time : Date.now()
     };
+    console.log("Note added");
+    console.log(note);
     notes.push(note);
     text.value = "";
     checkbox.checked = false;
@@ -99,11 +100,8 @@ function saveList() {
 }
 
 function generateId() {
-
-    var cache = localStorage.getItem("uuid");
-    if (cache) {
-        var id = cache;
-    } else {
+    var id = localStorage.getItem("uuid");
+    if (!id) {
         var id = 0;
     }
     id++;
