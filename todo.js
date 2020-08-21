@@ -45,15 +45,17 @@ function printList() {
         paragraph.addEventListener("click", printList);
 
         var date = new Date(note.time);
-        var time = "(" + date.getDate() + "/" + (date.getMonth()+1) + ")";
+        var time = `(${date.getDate()}/${date.getMonth() + 1})`;
 
-        var text = document.createTextNode(note.message + " " + time);
+        var text = document.createTextNode(`${note.message} ${time}`);
         paragraph.appendChild(text);
         paragraph.className = (note.done) ? "done" : "todo";
         list.appendChild(paragraph);
 
         var checkbox = document.createElement("input");
         checkbox.setAttribute("type", "checkbox");
+        checkbox.addEventListener("click", printList);
+        checkbox.setAttribute("id", note.id);
         if (note.done) {
             checkbox.setAttribute("checked", null);
         }
