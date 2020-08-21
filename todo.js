@@ -82,10 +82,13 @@ function add(event) {
         checkbox
         ] = readForm();
 
+    var { value : message } = text;
+    var { checked : done } = checkbox;
+
     var note = {
         id : generateId(),
-        message : text.value,
-        done : checkbox.checked,
+        message,
+        done,
         time : Date.now()
     };
     console.log("Note added");
